@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
     "--disable-tools"
     "--cpu=${arch_map.${user_arch}}"
   ];
-  NIX_LDFLAGS = [ "-lglib-2.0" ];
+  NIX_LDFLAGS = [ "-lglib-2.0" "-lpthread" ];
   enableParallelBuilding = true;
   postInstall = ''
     cc -static ${./qemu-wrap.c} -D QEMU_ARM_BIN="\"qemu-${user_arch}"\" -o $out/bin/qemu-wrap
